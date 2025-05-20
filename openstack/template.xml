@@ -1,0 +1,57 @@
+<domain type='kvm' id='8'>
+  <name>%VM_NAME%</name>
+  <memory unit='KiB'>%VM_MEM%</memory>
+  <currentMemory unit='KiB'>%VM_MEM%</currentMemory>
+  <vcpu placement='static'>%VM_CPU%</vcpu>
+  <os>
+    <type arch='x86_64' machine='pc-i440fx-rhel7.6.0'>hvm</type>
+    <boot dev='hd'/>
+  </os>
+  <features>
+    <acpi/>
+    <apic/>
+  </features>
+  <clock offset='utc'>
+    <timer name='rtc' tickpolicy='catchup'/>
+    <timer name='pit' tickpolicy='delay'/>
+    <timer name='hpet' present='no'/>
+  </clock>
+  <on_poweroff>destroy</on_poweroff>
+  <on_reboot>restart</on_reboot>
+  <on_crash>destroy</on_crash>
+  <pm>
+    <suspend-to-mem enabled='no'/>
+    <suspend-to-disk enabled='no'/>
+  </pm>
+  <devices>
+    <emulator>/usr/libexec/qemu-kvm</emulator>
+    <disk type='file' device='disk'>
+      <driver name='qemu' type='qcow2'/>
+      <source file='%VM_QCOW2_IMAGE_PATH%'/>
+      <backingStore/>
+      <target dev='vda' bus='virtio'/>
+      <alias name='virtio-disk0'/>
+    </disk>
+    <controller type='usb' index='0'></controller>
+    <controller type='pci' index='0' model='pci-root'></controller>
+    <controller type='ide' index='0'></controller>
+    <controller type='virtio-serial' index='0'></controller>
+    <interface type='bridge'>
+      <source bridge='%VM_BRIDGE%'/>
+      <model type='virtio'/>
+      <driver name='vhost' queues='%VM_CPU%' />
+    </interface>
+    <serial type='pty'></serial>
+    <console type='pty'></console>
+    <input type='tablet' bus='usb' />
+    <input type='mouse' bus='ps2'/>
+    <input type='keyboard' bus='ps2'/>
+    <graphics type='vnc' autoport='yes' listen='0.0.0.0'>
+      <listen type='address' address='0.0.0.0'/>
+    </graphics>
+    <video>
+      <model type='cirrus' heads='1' primary='yes'/>
+    </video>
+    <memballoon model='virtio'></memballoon>
+  </devices>
+</domain>
