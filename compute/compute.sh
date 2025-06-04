@@ -172,6 +172,7 @@ function config_nova {
     sed -i "s|^#service_down_time=.*|service_down_time=60|" $nova_file
     sed -i "s|^#rpc_response_timeout=.*|rpc_response_timeout=60|" $nova_file
     sed -i "s|^#resume_guests_state_on_host_boot=.*|resume_guests_state_on_host_boot=true|" $nova_file
+    sed -i "s|^#dhcp_domain=.*|dhcp_domain=|" $nova_file
 
     info "2.修改[vnc]配置"
     sed -i "5432s|^#enabled=.*|enabled=true|" $nova_file
