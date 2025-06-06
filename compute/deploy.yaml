@@ -1,0 +1,30 @@
+---
+- name: openstack compute node install
+  hosts: "{{ nova }}"
+  gather_facts: no
+  become: yes
+  become_user: root
+  vars:
+    source_path: ""
+    local_ip: ""
+    nic: ""
+    region: ""
+    vip: ""
+    token: ""
+    rabbitmq_user: ""
+    rabbitmq_pass: ""
+    rabbitmq_host: ""
+
+  tasks:
+  - name: copy yoga dir
+    synchronize:
+      src: "{{ source_path }}/yoga/"
+      dest: /opt/yoga/
+      owner: yes
+      group: yes
+      perms: yes
+      delete: yes
+
+  - name: install yoga
+    shell: cd /opt/yoga && sh compute.sh -i {{ local_ip }} -n {{ nic }} -r {{ region }} -v {{ vip }} -t {{ token }} -u {{ rabbitmq_user }}  -p {{ rabbitmq_pass }} -h {{ rabbitmq_host }}
+

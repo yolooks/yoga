@@ -24,8 +24,10 @@ openssl rand -hex 10
 .
 ├── README.md
 ├── compute
-│   ├── compute.sh       -- 初始化openstack计算节点
-│   └── ssh.tar.gz
+│   ├── deploy.yaml      -- 初始化openstack计算节点
+│   └── yoga
+│       ├── compute.sh
+│       └── ssh.tar.gz
 ├── control
 │   ├── control.sh       -- 初始化openstack控制节点
 │   └── driver.py

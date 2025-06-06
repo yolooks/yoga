@@ -347,7 +347,7 @@ a\    return ""
 
 function set_nova_sshkey {
     info "为nova用户添加免密认证, 以实现虚拟机迁移"
-    tar zxf ssh.tar.gz -C /var/lib/nova/ && chown -R nova:nova /var/lib/nova/.ssh/
+    cd /opt/yoga && tar zxf ssh.tar.gz -C /var/lib/nova/ && chown -R nova:nova /var/lib/nova/.ssh/
 }
 
 print_param
