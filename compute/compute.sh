@@ -46,7 +46,7 @@ done
 [ -z "$rabbitmq_host" ] && echo "错误: RabbitMQ 主机 (-h) 必须指定" && usage
 
 function print_param {
-	echo "参数确认:"
+    echo "参数确认:"
     echo "my_ip=$my_ip"
     echo "nic=$nic"
     echo "region=$region"
@@ -123,8 +123,8 @@ function install_nova_compute {
     cd /tmp && wget https://vault.centos.org/8-stream/cloud/x86_64/openstack-yoga/Packages/p/python3-os-vif-2.7.1-1.el8.noarch.rpm
     cd /tmp && dnf install -y ./python3-os-vif-2.7.1-1.el8.noarch.rpm
 
-	info "8.安装libaec(提供libsz.so.2)"
-	cd /tmp && wget https://download.rockylinux.org/vault/centos/8-stream/PowerTools/x86_64/os/Packages/libaec-1.0.2-3.el8.x86_64.rpm
+    info "8.安装libaec(提供libsz.so.2)"
+    cd /tmp && wget https://download.rockylinux.org/vault/centos/8-stream/PowerTools/x86_64/os/Packages/libaec-1.0.2-3.el8.x86_64.rpm
     cd /tmp && dnf install -y ./libaec-1.0.2-3.el8.x86_64.rpm
 
     info "9.安装hdf5"
